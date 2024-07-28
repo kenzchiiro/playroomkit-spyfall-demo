@@ -8,7 +8,7 @@ function App() {
         <div className="w-screen justify-center p-2">
           <div className="h-fit mb-4 w-full grid justify-items-end">
             <button
-              className="btn btn-outline btn-secondary btn-md m-4"
+              className="btn btn-outline btn-neutral btn-md m-4"
               >
               RESTART
             </button>
