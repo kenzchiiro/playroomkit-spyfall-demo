@@ -25,7 +25,7 @@ function App() {
           <div className="w-full carousel carousel-center space-x-2 justify-center">
             {Object.keys(cardsOwner).map(playerName => {
               if (playerName===myPlayerName){
-                return <Card owner={playerName} data={cardsOwner[playerName]} />
+                return <Card owner={playerName} data={cardsOwner[playerName]} isHost={isHost()} />
               }
             })}
           </div>
