@@ -13,7 +13,7 @@ const GameEngineContext = React.createContext();
 export const GameEngineProvider = ({ children }) => {    
     // set state in game
     const [cards, setCards] = useMultiplayerState("cards", data.cards);
-    const [cardsOwner, setCardsOwner] = useMultiplayerState("cardsOwner", []);
+    const [cardsOwner, setCardsOwner] = useMultiplayerState("cardsOwner", {});
     const [state, setState] = useMultiplayerState("state", "");
 
     // collect players data from playroomkit
@@ -28,37 +28,62 @@ export const GameEngineProvider = ({ children }) => {
     };
 
 
-    const randomeCards = (players) => {
+    const randomCards = () => {
         // random spy by player index
         const randomSpyIndex = randInt(0, players.length - 1);
 
         // init empty card
-        var card = {};
+        var owner = {};
         // random place
         const randomPlaceIndex = randInt(0, cards.length - 1);
-        const place = data[randomPlaceIndex].place
+        const place = cards[randomPlaceIndex].place
 
         // set card each player
-        players.forEach((index, player) => {
+        players.forEach((player, index) => {
           if (index===randomSpyIndex){
-            card["palce"] = ""
-            card[player.getProfile().name] = ""
+            owner[player.getProfile().name] = {"place":"","role":""}
           }else{
-            card["palce"] = place
-            const randomRoleIndex = randInt(0, place.roles.length - 1);
-            card[player.getProfile().name] = place.role[randomRoleIndex]
+            const randomRoleIndex = randInt(0, cards[randomPlaceIndex].roles.length - 1);
+            owner[player.getProfile().name] = {"place":place,"role":cards[randomPlaceIndex].roles[randomRoleIndex]}
           }
-          setCardsOwner(card,true)
+          setCardsOwner(owner,true)
           player.setState("status","")
         });
         return
     }
 
+    const startGame = () => {
+        const isStarted = state ==="started" ? true: false
+        if (isHost()&&!isStarted) {
+          setState("started",true)
+          console.log("start game");
+          randomCards(players);
+          console.log("cardsOwner",cardsOwner)
+         }
+        return
+    };
+
+
+    const restartGame = () => {
+        if (isHost()) {
+            setState("started",true)
+            console.log("restart game");
+            randomCards(players);
+        }
+        return
+    };
+
+
+    useEffect(() => {
+        startGame();
+    }, []);
 
     return (
         <GameEngineContext.Provider value={
             {
-                ...gameState
+                ...gameState,
+                startGame,
+                restartGame
             }
         }>
             {children}

@@ -9,4 +9,3 @@ export default {
     require("tailwindcss-bg-patterns"),
   ],
 }
-
