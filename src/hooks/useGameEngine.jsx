@@ -25,6 +25,7 @@ export const GameEngineProvider = ({ children }) => {
         players,
         cards,
         cardsOwner,
+        state,
     };
 
 
