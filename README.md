@@ -1,6 +1,6 @@
 # PlaroomKit Spyfall Demo
 
-#### install Depencencies
+#### install dependencies
 ```
 pnpm i
 ```
