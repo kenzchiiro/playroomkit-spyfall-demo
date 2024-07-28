@@ -12,5 +12,10 @@ pnpm run dev
 
 #### build project
 ```
-pnpm run build
+pnpm run predeploy
+```
+
+#### deploy project to github page
+```
+pnpm run deploy
 ```
