@@ -20,7 +20,7 @@ function App() {
         <div className="w-screen justify-center p-2 mt-16">
           <div className="w-full carousel carousel-center space-x-2 justify-center">
           {Object.keys(dataState).map(playerName => {
-                return <Card owner={playerName} data={dataState[playerName]} />
+                return <Card owner={playerName} data={dataState[playerName]} isHost={false} />
             })}
           </div>
         </div>
