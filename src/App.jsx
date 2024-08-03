@@ -7,7 +7,6 @@ function App() {
 
   const myPlayerName = myPlayer().getProfile().name
 
-  myPlayer
   return (
     <div>
       <div className="h-fit w-full grid justify-items-end">
